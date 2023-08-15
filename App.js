@@ -1,15 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { StyleSheet, Text, View } from 'react-native';
-import GreetingsInput from './components/GreetingsInput';
 import BirthdayCard from './components/BirthdayCard';
 import backgroundImage from './components/birthday.jpg'
 import { ImageBackground } from 'react-native';
+
 export default function App() {
+
+
   return (
     <ImageBackground source={backgroundImage} style={styles.backImage}>
       <View style={styles.container}>
-      <Text style={styles.textHeader}>Happy Birthday!</Text>
-      
+      <Text style={styles.textHeader}>Happy Birthday!</Text> 
       <BirthdayCard/>
 
     </View>
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   textHeader:{
     fontSize: 40,
     fontWeight: 'bold',
-    color : '#FFF',
+    color : '#FF00FF',
     justifyContent : 'center',
     alignItems: 'center',
     fontFamily: 'pacifico'

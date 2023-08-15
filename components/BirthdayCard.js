@@ -2,8 +2,14 @@ import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
 import React, { useState } from 'react'
 import GreetingsInput from './GreetingsInput'
 import Happy from '/try.jpg'
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons'
+
 export default function BirthdayCard() {
     const [greetingMessage, setGreetingMessage] = useState('');
+    const handleClearButton = () => {
+        setGreetingMessage('')
+
+    }
     const handleButton = () => {
         console.log(greetingMessage);
     }
@@ -13,8 +19,20 @@ export default function BirthdayCard() {
                 <GreetingsInput
                     value={greetingMessage}
                     textInput={setGreetingMessage} />
+                     <Text>To add emojits press windows button and .</Text>
+                <Pressable
+                    style={styles.clear}
+                    onPress={handleClearButton}
+                >
+                    <MaterialIcons
+                        name='clear'
+                        size={54}
+                        style={styles.clearText}
+                    />
+
+                </Pressable>
                 <View style={styles.cardBox}>
-                    <Text style={styles.greeting}>{greetingMessage}</Text>
+
                     <View style={styles.imgContainer}>
                         <Image
                             style={styles.img}
@@ -22,17 +40,32 @@ export default function BirthdayCard() {
                             resizeMode='cover' />
 
                     </View>
+                    <View style={styles.mesageBox}>
+                        <Text style={styles.greeting}>{greetingMessage}</Text>
+                       
+                    </View>
+
                 </View>
+                <Pressable
+                    style={styles.wishButton}
+                    onPress={handleButton}
+                >
+                    <Text style={styles.text}>Wish</Text>
+                </Pressable>
+                <Pressable
+                    style={styles.share}
+                >
+                    <FontAwesome
+                        name='share-alt'
+                        size={34}
+                        style={styles.iconShare} />
+                    <Text style={styles.shareText}>Share</Text>
+
+                </Pressable>
 
             </View>
 
-            <Pressable
-                style={styles.wishButton}
-                onPress={handleButton}
 
-            >
-                <Text style={styles.text}>Wish</Text>
-            </Pressable>
 
 
         </View>
@@ -50,48 +83,71 @@ const styles = StyleSheet.create({
 
     },
     card: {
-        padding: 20
+        padding: 20,
 
     },
-    cardBox:{
+    cardBox: {
         width: 300,
         height: 400,
         borderColor: '#FFF',
-        flexDirection: 'column'
+        flexDirection: 'row',
+        marginBottom: 20
 
+    },
+    clear: {
+        paddingHorizontal: 10,
+        width: '25%',
+        height: 40,
+        borderRadius: 20,
+        marginLeft: '91%',
+        marginTop: -75
+
+    },
+    clearText: {
+        color: '#FFF',
+        fontSize: 40,
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
     greeting: {
         fontSize: 24,
         fontWeight: 'bold',
         fontFamily: 'pacifico',
-        color: '#FFF',
+        color: '#FF00FF',
+        alignItems: 'center',
         textAlign: 'center',
-        padding: 10,
-        flexWrap: 'wrap',
-        width: 200
+        fontStyle: 'italic'
+
     },
     imgContainer: {
-     width: 200,
-     height: 200,
-     justifyContent: 'center',
-     alignSelf: 'center',
-     borderRadius: 10,
-     marginTop: 150
+        width: 200,
+        height: 200,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 10,
+        marginTop: 10,
 
     },
     img: {
         width: 200,
         height: 200,
-        marginLeft:-33
+        marginLeft: 40
+    },
+    mesageBox: {
+        height: 150,
+        marginTop: "110%",
+        marginLeft: -170,
+        width: '90%'
     },
     wishButton: {
+        alignSelf: 'center',
         borderRadius: 14,
         borderColor: '#FFF',
-        width: '70%',
+        width: '30%',
         backgroundColor: "skyblue",
         height: 40,
         alignItems: 'center',
-        marginTop: 20
+        marginTop: 90
 
     },
     text: {
@@ -101,5 +157,15 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         color: '#FFF'
 
+    },
+    share: {
+        marginLeft: '90%',
+        width: 40
+    },
+    iconShare: {
+        color: 'skyblue'
+    },
+    shareText: {
+        color: '#FFF'
     }
 })
