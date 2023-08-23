@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Image , Share } from 'react-native'
 import React, { useState } from 'react'
 import GreetingsInput from './GreetingsInput'
 import Happy from '/try.jpg'
@@ -13,13 +13,38 @@ export default function BirthdayCard() {
     const handleButton = () => {
         console.log(greetingMessage);
     }
+    const handleButtonShare = async () => {
+        try {
+            const result = await Share.share({
+                message: greetingMessage,
+                url: Happy,
+            });
+    
+            if (result) {
+                if (result.action === Share.sharedAction) {
+                    if (result.activityType) {
+                        console.log(`Shared via ${result.activityType}`);
+                    } else {
+                        console.log('Shared successfully');
+                    }
+                } else if (result.action === Share.dismissedAction) {
+                    console.log('Shared dismissed');
+                }
+            } else {
+                console.log('Share operation failed or was dismissed');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
     return (
         <View style={styles.container} >
             <View style={styles.card}>
                 <GreetingsInput
                     value={greetingMessage}
                     textInput={setGreetingMessage} />
-                     <Text>To add emojits press windows button and .</Text>
+                     <Text>To add emojiss press windows button and .</Text>
                 <Pressable
                     style={styles.clear}
                     onPress={handleClearButton}
@@ -53,6 +78,7 @@ export default function BirthdayCard() {
                     <Text style={styles.text}>Wish</Text>
                 </Pressable>
                 <Pressable
+                onPress={handleButtonShare}
                     style={styles.share}
                 >
                     <FontAwesome
